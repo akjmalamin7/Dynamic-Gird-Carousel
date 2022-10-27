@@ -24,10 +24,12 @@
 .gcl1_carousel {
     position: relative;
     width: 100%;
+    overflow: hidden;
 }
 
 .gcl1_carousel_inner {
     height: 100%;
+    display: flex;
 }
 
 .gcl1_carousel_inner img {
@@ -111,6 +113,7 @@
 }
 .gcl1_carousel_item{
     height: 100%;
+    min-width: 100%;
 }
 .gcl1_bottom_align .gcl1_featured_images {
     display: grid;
