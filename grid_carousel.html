@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- 
+    alignment change when using this class
+
+    1.gcl1_top_align
+    2.gcl1_left_align
+    3.gcl1_right_align
+    4.gcl1_bottom_align
+    
+    gcl1_indicator_active
+
+-->
+
+<body>
+    <div class="gcl1_carousel_section gcl1_universal" id="gcl1_carousel_section">
+        <div class="gcl1_container">
+            <div class="gcl1_carousel_wrapper " id="gcl1_carousel_wrapper">
+                <div class="gcl1_carousel" id="gcl1_carousel">
+                    <div class="gcl1_carousel_inner" id="gcl1_carousel_inner">
+                        <div class="gcl1_carousel_item">
+                            <img src="carousel.png" alt="">
+                        </div>
+                    </div>
+                    <div class="gcl1_indicators" id="gcl1_indicators">
+                        <div class="gcl1_indicator"></div>
+                        <div class="gcl1_indicator gcl1_indicator_active"></div>
+                        <div class="gcl1_indicator"></div>
+                    </div>
+                    <div class="gcl1_controls" id="gcl1_controls">
+                        <button class="gcl1_prev" id="gcl1_prev">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="7.173" height="14.001"
+                                viewBox="0 0 7.173 14.001">
+                                <path id="Arrow"
+                                    d="M10.6,12.71a1,1,0,0,1,0-1.42l4.59-4.58a1,1,0,1,0-1.41-1.42L9.19,9.88a3,3,0,0,0,0,4.24l4.59,4.59a1,1,0,1,0,1.41-1.42Z"
+                                    transform="translate(-8.313 -4.999)" />
+                            </svg>
+                        </button>
+                        <button class="gcl1_next" id="gcl1_next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="7.173" height="14.001"
+                                viewBox="0 0 7.173 14.001">
+                                <path id="Arrow"
+                                    d="M15.4,9.88,10.81,5.29A1,1,0,1,0,9.4,6.71L14,11.29a1,1,0,0,1,0,1.42L9.4,17.29a1,1,0,0,0,1.41,1.42l4.59-4.59A3,3,0,0,0,15.4,9.88Z"
+                                    transform="translate(-9.104 -4.999)" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="gcl1_featured_images" id="gcl1_featured_images">
+                    <div class="gcl1_featured_image">
+                        <img src="card.png" alt="">
+                    </div>
+                    <div class="gcl1_featured_image">
+                        <img src="card.png" alt="">
+                    </div>
+                    <div class="gcl1_featured_image">
+                        <img src="card.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
