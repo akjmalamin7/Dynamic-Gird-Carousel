@@ -1,9 +1,9 @@
 let count = 0;
 let size = 100;
 let transition = 0.5;
-let speed = 3000;
-let gridDirection = "rightAlign"; // topAlign, bottomAlign, leftAlign, rightAlign
-let moveBothWays = "leftToRight" // leftToRight, rightTolLeft, topToBottom
+let speed = 2000;
+let gridDirection = "leftAlign"; // topAlign, bottomAlign, leftAlign, rightAlign
+let moveBothWays = "topToBottom"; // leftToRight, rightTolLeft, topToBottom, bottomToTop
 let isSlide = true;
 let parentDivElement;
 
@@ -11,7 +11,7 @@ let isArrowController = true; // true or false
 let isDotController = true; // true or false
 
 let dotControllerPosition = "center"; //left, center, right
-let arrowControllerPosition = "left-right"; // left-right, center
+let arrowControllerPosition = "leftRight"; // left-right, center
 
 let carouselImgArr = [
   "carousel.png",
@@ -28,6 +28,7 @@ let carouselWrapper = document.getElementById("gcl1_carousel_wrapper");
 let carouselPushHere = document.getElementById("gcl1_carousel");
 let carouselInner = document.getElementById("gcl1_carousel_inner");
 let carouselSlide = carouselInner;
+// console.log(carouselSlide)
 
 let featureImageContainer = document.getElementById("gcl1_featured_images");
 let dotIndicatorPushHere = document.getElementById("gcl1_indicators");
@@ -39,77 +40,188 @@ let carouselImages = carouselImage();
 
 // grid alignment
 if (gridDirection === "topAlign") {
-	carouselWrapper.classList.add("gcl1_top_align");
-}else if(gridDirection === "bottomAlign"){
-	carouselWrapper.classList.add("gcl1_bottom_align");
-}else if(gridDirection === "leftAlign"){
-	carouselWrapper.classList.add("gcl1_left_align");
-	featureImageContainer.children[2].remove()
-	// carouselWrapper.
-}else if(gridDirection === "rightAlign"){
-	carouselWrapper.classList.add("gcl1_right_align");
-	featureImageContainer.children[2].remove()
-};
+  carouselWrapper.classList.add("gcl1_top_align");
+} else if (gridDirection === "bottomAlign") {
+  carouselWrapper.classList.add("gcl1_bottom_align");
+} else if (gridDirection === "rightAlign") {
+  carouselWrapper.classList.add("gcl1_left_align");
+  featureImageContainer.children[2].remove();
+  // carouselWrapper.
+} else if (gridDirection === "leftAlign") {
+  carouselWrapper.classList.add("gcl1_right_align");
+  featureImageContainer.children[2].remove();
+}
+
+if (moveBothWays === "leftToRight" || moveBothWays === "rightToLeft") {
+  carouselSlide.style.flexDirection = "row";
+} else if (moveBothWays === "topToBottom" || moveBothWays === "bottomToTop") {
+  carouselSlide.style.flexDirection = "column";
+  let imgHeight = document.querySelectorAll(".gcl1_carousel");
+  console.log(imgHeight);
+  carouselSection.style.height;
+}
 
 !isArrowController && arrowControllerWrapper.remove();
 !isDotController && dotIndicatorPushHere.remove();
 
 let carouselItemSize = carouselImages.length;
-if(carouselItemSize === 0){
-	carouselSection && carouselSection.remove();
-};
+if (carouselItemSize === 0) {
+  carouselSection && carouselSection.remove();
+}
 
-
-// slider create 
+// slider create
 (function () {
-	for( let i = 0; i<carouselItemSize; i++){
+  for (let i = 0; i < carouselItemSize; i++) {
+    let carouselImgUrl = carouselImages[i];
 
-		let carouselImgUrl = carouselImages[i];
+    // create  and append carousel item
+    let carouselItem = elementMaker("div", ["gcl1_carousel_item"]);
+    let carouselImgTag = elementMaker("img", [""], `gcl1_carousel_img${i}`);
+    carouselImgTag.src = carouselImgUrl;
+    carouselItem.appendChild(carouselImgTag);
+    carouselInner.appendChild(carouselItem);
 
-		// create  and append carousel item
-		let carouselItem = elementMaker("div", ["gcl1_carousel_item",], `gcl1_carousel_item${i}`);
-		let carouselImgTag = elementMaker("img", [""], `gcl1_carousel_img${i}`);
-		carouselImgTag.src = carouselImgUrl;
-		carouselItem.appendChild(carouselImgTag);
-		carouselInner.appendChild(carouselItem);
+    // create append dot indicatorItem
+    let dotIndicatorItem = elementMaker(
+      "div",
+      [`gcl1_indicator ${i === 0 ? "gcl1_indicator_active" : ""}`],
+      `gcl1_indicator_dot${i}`
+    );
+    document
+      .querySelector("gcl1_indicator")
+      ?.classList.add("gcl1_indicator_active");
+    dotIndicatorPushHere.appendChild(dotIndicatorItem);
+  }
+  parentDivElement = carouselInner;
+  let cloneFirstChild = parentDivElement.firstElementChild.cloneNode(true);
+  cloneFirstChild && (cloneFirstChild.id = "first_carousel_item");
+  let cloneLastChild = parentDivElement.lastElementChild.cloneNode(true);
+  cloneLastChild.id = "last_carousel_item";
+  parentDivElement && parentDivElement.appendChild(cloneFirstChild);
 
-		// create append dot indicatorItem
-		let dotIndicatorItem = elementMaker("div", ["gcl1_indicator",]);
-		document.querySelector("gcl1_indicator")?.classList.add("gcl1_indicator_active");
-		dotIndicatorPushHere.appendChild(dotIndicatorItem);
-	};
-	parentDivElement = carouselInner;
-	let cloneFirstChild = parentDivElement.firstElementChild.cloneNode(true);
-	cloneFirstChild && (cloneFirstChild.id = "first_carousel_item");
-	// let cloneLastChild = parentDivElement.lastElementChild.cloneNode(true);
-	// cloneLastChild.id = "last_carousel_item";
-	parentDivElement && parentDivElement.appendChild(cloneFirstChild);
-	
-	// parentDivElement.insertAdjacentElement('afterbegin', cloneLastChild)
+  parentDivElement.insertAdjacentElement("afterbegin", cloneLastChild);
 })();
 
-if(moveBothWays === "leftToRight" || moveBothWays === "rightToLeft"){
-	carouselSlide && (carouselSlide.style.transform = "translateX(" + (-size*count) + "%)");
+let carouselItem = [...carouselSlide.children];
 
-}else if(moveBothWays === "topToBottom" || moveBothWays === "bottomToTop"){
-	carouselSlide && (carouselSlide.style.transform = "translateY(" + (-size*count) + "%)");
+if (moveBothWays === "rightToLeft" || moveBothWays === "leftToRight") {
+  carouselSlide &&
+    (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
+} else if (moveBothWays === "topToBottom" || moveBothWays === "bottomToTop") {
+  carouselSlide &&
+    (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
 }
+
+let translate;
+let ind = 0;
+
+function changeSlider() {
+  removeClass();
+  if (count >= carouselSlide?.children?.length - 1) return;
+  carouselSlide &&
+    (carouselSlide.style.transition = `transform ${transition}s ease-in-out`);
+  if (moveBothWays === "rightToLeft" || moveBothWays === "bottomToTop") {
+    count++;
+  } else if (moveBothWays === "leftToRight" || moveBothWays === "topToBottom") {
+    count--;
+  }
+
+  if (moveBothWays === "rightToLeft" || moveBothWays === "leftToRight") {
+    carouselSlide &&
+      (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
+  } else if (moveBothWays === "topToBottom" || moveBothWays === "bottomToTop") {
+    carouselSlide &&
+      (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
+  }
+
+  ind++;
+
+  if (ind >= dotIndicatorPushHere?.children.length) {
+    ind = 0;
+	
+  }
+  document
+    .getElementById(`gcl1_indicator_dot${ind}`)
+    .classList.add("gcl1_indicator_active");
+}
+
+if (isSlide === true && document.getElementById("gcl1_carousel_section")) {
+  let translate = setInterval(changeSlider, speed);
+}
+
+// transition end
+carouselSlide.addEventListener("transitionend", function () {
+  if (carouselItem[count]?.id === "first_carousel_item") {
+    carouselSlide && (carouselSlide.style.transition = "none");
+    count = carouselItem.length - count;
+    if (moveBothWays === "rightToLeft" || moveBothWays === "LeftToRight") {
+      carouselSlide &&
+        (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
+    } else if (
+      moveBothWays === "topToBottom" ||
+      moveBothWays === "bottomToTop"
+    ) {
+      carouselSlide &&
+        (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
+    }
+  }
+  if (carouselItem[count]?.id === "last_carousel_item") {
+    carouselSlide && (carouselSlide.style.transition = "none");
+    count = carouselItem.length - 2;
+    if (moveBothWays === "rightToLeft" || moveBothWays === "leftToRight") {
+      carouselSlide &&
+        (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
+    } else if (
+      moveBothWays === "topToBottom" ||
+      moveBothWays === "bottomToTop"
+    ) {
+      carouselSlide &&
+        (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
+    }
+  }
+});
+
+// add active class
+[...document.getElementsByClassName("gcl1_indicator")].forEach(
+  (indicator, index) => {
+    indicator.addEventListener("click", function () {
+      removeClass();
+      indicator.classList.add("gcl1_indicator_active");
+      carouselSlide &&
+        (carouselSlide.style.transition = `transform ${transition}s ease-in-out`);
+      count = index + 1;
+      if (moveBothWays === "rightToLeft" || moveBothWays === "leftToRight") {
+        carouselSlide &&
+          (carouselSlide.style.transform =
+            "translateX(" + -size * count + "%)");
+      } else if (
+        moveBothWays === "topToBottom" ||
+        moveBothWays === "bottomToTop"
+      ) {
+        carouselSlide &&
+          (carouselSlide.style.transform =
+            "translateY(" + -size * count + "%)");
+      }
+      ind = index;
+    });
+  }
+);
 
 // carouselImage
 function carouselImage() {
   try {
     let carouselAllImage = carouselImgArr;
-    if(carouselAllImage.length >= 0){
-    	if(carouselAllImage.length === 0){
-    		document.getElementById("gcl1_carousel_section").remove();
-    	};
-    };
+    if (carouselAllImage.length >= 0) {
+      if (carouselAllImage.length === 0) {
+        document.getElementById("gcl1_carousel_section").remove();
+      }
+    }
 
     return carouselAllImage;
   } catch (err) {
     console.log("carousel Image Function Error", err);
   }
-};
+}
 
 // elementMaker
 function elementMaker(elemName, className, idName) {
@@ -121,4 +233,10 @@ function elementMaker(elemName, className, idName) {
   } catch (err) {
     console.log(err);
   }
-};
+}
+
+function removeClass() {
+  [...document.getElementsByClassName("gcl1_indicator")].forEach((children) => {
+    children.classList.remove("gcl1_indicator_active");
+  });
+}

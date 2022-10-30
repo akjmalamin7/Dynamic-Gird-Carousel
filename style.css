@@ -19,7 +19,9 @@
 
 .gcl1_carousel_section {}
 
-.gcl1_carousel_wrapper {}
+.gcl1_carousel_wrapper {
+    max-height: 405px;
+}
 
 .gcl1_carousel {
     position: relative;
