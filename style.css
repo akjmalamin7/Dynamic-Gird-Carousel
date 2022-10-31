@@ -129,26 +129,27 @@
 /* updated */
 .gcl1_left_align .gcl1_carousel_inner,
 .gcl1_right_align .gcl1_carousel_inner {
-    height: 280px;
+    height: 250px;
 }
 
 .gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img,
 .gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
-    height: 280px;
+    height: 250px;
     width: 100%;
     object-fit: cover;
 }
 
 .gcl1_bottom_align .gcl1_carousel_inner,
 .gcl1_top_align .gcl1_carousel_inner {
-    height: 280px;
+    height: 250px;
 }
 
 .gcl1_bottom_align .gcl1_carousel_inner .gcl1_carousel_item img,
 .gcl1_top_align .gcl1_carousel_inner .gcl1_carousel_item img {
-    height: 280px;
+    height: 250px;
     width: 100%;
     object-fit: cover;
+    transition: all 1s ease-in-out;
 }
 
 .gcl1_top_align .gcl1_featured_images {
@@ -156,8 +157,10 @@
     flex-direction: row;
 }
 
-@media(max-width:767px){
-    .gcl1_top_align .gcl1_featured_images .gcl1_featured_image:nth-child(1), .gcl1_bottom_align .gcl1_featured_images .gcl1_featured_image:nth-child(1){
+@media(max-width:767px) {
+
+    .gcl1_top_align .gcl1_featured_images .gcl1_featured_image:nth-child(1),
+    .gcl1_bottom_align .gcl1_featured_images .gcl1_featured_image:nth-child(1) {
         display: none;
     }
 }
@@ -217,9 +220,9 @@
     }
 
     .gcl1_featured_image {
-        width: 100%;
+        /* width: 100%; */
         gap: 15px;
-        height: 100%;
+        /* height: 100%; */
     }
 
     /* right align */
@@ -334,8 +337,15 @@
 
     .gcl1_left_align .gcl1_carousel_inner,
     .gcl1_right_align .gcl1_carousel_inner {
-        height: 405px;
+        height: 390px;
     }
+
+    /* .gcl1_left_align.gcl1_carousel_wrapper,
+    .gcl1_right_align.gcl1_carousel_wrapper,
+    .gcl1_bottom_align.gcl1_carousel_wrapper ,
+    .gcl1_top_align.gcl1_carousel_wrapper  {
+        height: 390px;
+    } */
 
     .gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img,
     .gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
@@ -344,7 +354,7 @@
 
     .gcl1_bottom_align .gcl1_carousel_inner,
     .gcl1_top_align .gcl1_carousel_inner {
-        height: 405px;
+        height: 390px;
     }
 
     .gcl1_bottom_align .gcl1_carousel_inner .gcl1_carousel_item img,

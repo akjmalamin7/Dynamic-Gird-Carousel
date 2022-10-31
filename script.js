@@ -3,11 +3,11 @@ let size = 100;
 let transition = 0.5;
 let speed = 2000;
 let gridDirection = "leftAlign"; // topAlign, bottomAlign, leftAlign, rightAlign
-let moveBothWays = "topToBottom"; // leftToRight, rightToLeft, topToBottom, bottomToTop
+let moveBothWays = "bottomToTop"; // leftToRight, rightToLeft, topToBottom, bottomToTop
 let isSlide = true;
 let parentDivElement;
 
-let isArrowController = true; // true or false
+let isArrowController = false; // true or false
 let isDotController = true; // true or false
 
 let dotControllerPosition = "center"; //left, center, right
