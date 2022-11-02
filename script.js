@@ -2,9 +2,31 @@ let count = 1;
 let size = 100;
 let transition = .5;
 let speed = 2000;
-let gridDirection = "rightAlign"; // topAlign, bottomAlign, leftAlign, rightAlign
-let moveBothWays = "bottomToTop"; // leftToRight, rightToLeft, topToBottom, bottomToTop
+
+// layout
+let sliderLayout = "type5" // type1, type2, type3, type4, type5
+
+// show slider
+let showSlider1 = true // true, false
+let sliderImage1 = "https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-1.webp";
+let slider1Link = "#";
+let showSlider2 = true; 
+let sliderImage2 = "https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-2.webp";
+let slider2Link = "#";
+let showSlider3 = true; 
+let sliderImage3 = "https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-3.webp";
+let slider3Link = "#";
+let showSlider4 = true; 
+let sliderImage4 = "";
+let slider4Link = "#";
+let showSlider5 = true; 
+let sliderImage5 = "";
+let slider5Link = "#";
+
+
+let moveBothWays = "rightToLeft"; // leftToRight, rightToLeft, topToBottom, bottomToTop
 let isSlide = true;
+let isContainerWidth = false; // true, false
 let parentDivElement;
 
 let isArrowController = true; // true or false
@@ -13,11 +35,26 @@ let isDotController = true; // true or false
 let dotControllerPosition = "center"; //left, center, right
 let arrowControllerPosition = "leftRight"; // left-right, center
 
-let carouselImgArr = [
-	"1.png",
-	"2.png",
-	"3.png"
-];
+let carouselImgArr = [];
+showSlider1 && sliderImage1 && carouselImgArr.push(sliderImage1);
+showSlider2 && sliderImage2 && carouselImgArr.push(sliderImage2);
+showSlider3 && sliderImage3 && carouselImgArr.push(sliderImage3);
+showSlider4 && sliderImage4 && carouselImgArr.push(sliderImage4);
+showSlider5 && sliderImage5 && carouselImgArr.push(sliderImage5);
+
+let carouselLinkArr = [];
+showSlider1 & slider1Link && carouselLinkArr.push(slider1Link);
+showSlider2 & slider2Link && carouselLinkArr.push(slider2Link);
+showSlider3 & slider3Link && carouselLinkArr.push(slider3Link);
+showSlider4 & slider4Link && carouselLinkArr.push(slider4Link);
+showSlider5 & slider5Link && carouselLinkArr.push(slider5Link);
+
+// let carouselImgArr = [
+// 	"https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-1.webp",
+// 	"https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-2.webp",
+// 	"https://www.soppiya.com/media/images/62370cf11dbdd69de562a184/carousel/image-3.webp"
+// ];
+
 let carouselBannerImgArr = ["card.png", "card.png", "card.png"];
 
 // select element
@@ -36,23 +73,39 @@ let nextBtn = document.getElementById("gcl1_next");
 let prevBtn = document.getElementById("gcl1_prev");
 let carouselImages = carouselImage();
 
-// grid alignment
-if (gridDirection === "topAlign") {
-	carouselWrapper.classList.add("gcl1_top_align");
-	// console.log(document.getElementById("gcl1_featured_images").offsetHeight+"px");
-} else if (gridDirection === "bottomAlign") {
-	carouselWrapper.classList.add("gcl1_bottom_align");
-	let height = document.getElementById("gcl1_featured_images").offsetHeight
-	document.getElementById("gcl1_carousel_inner").style.height = height + "px"
-	console.log(height)
-} else if (gridDirection === "leftAlign") {
+// slider layout
+
+if(sliderLayout === "type1"){
 	carouselWrapper.classList.add("gcl1_left_align");
 	featureImageContainer.children[2].remove();
-	// carouselWrapper.
-} else if (gridDirection === "rightAlign") {
+}else if(sliderLayout === "type2"){
 	carouselWrapper.classList.add("gcl1_right_align");
 	featureImageContainer.children[2].remove();
-};
+}else if(sliderLayout === "type3"){
+	carouselWrapper.classList.add("gcl1_top_align");
+}else if(sliderLayout === "type4"){
+	carouselWrapper.classList.add("gcl1_bottom_align");
+}else if(sliderLayout === "type5"){
+	carouselWrapper.classList.add("gcl1_right_align");
+	featureImageContainer.remove();
+	carouselPushHere.style.width = "100%"
+}
+
+
+if(carouselBannerImgArr.length === 0 || isContainerWidth){
+	featureImageContainer.remove();
+	carouselPushHere.style.width = "100%"
+}
+
+
+
+
+
+
+
+
+
+
 
 if (moveBothWays === "leftToRight" || moveBothWays === "rightToLeft") {
 	carouselSlide.style.flexDirection = "row";
@@ -68,15 +121,21 @@ if (carouselItemSize === 0) {
 	carouselSection && carouselSection.remove();
 };
 
+
+
 // slider create
 (function () {
 	for (let i = 0; i < carouselItemSize; i++) {
 		let carouselImgUrl = carouselImages[i];
+		// let carouselHyperLinkUrl = carouselLinkArr[i];
 
 		// create  and append carousel item
 		let carouselItem = elementMaker("div", ["gcl1_carousel_item"]);
+		let carouselHyperLink = elementMaker("a", ["gcl1_carousel_link"], `gcl1_carousel_link${i}`);
+		// carouselHyperLink.href = carouselHyperLinkUrl;
 		let carouselImgTag = elementMaker("img", [""], `gcl1_carousel_img${i}`);
 		carouselImgTag.src = carouselImgUrl;
+		// carouselHyperLink.appendChild(carouselImgTag)
 		carouselItem.appendChild(carouselImgTag);
 		carouselInner.appendChild(carouselItem);
 
@@ -153,11 +212,11 @@ if (isSlide === true && document.getElementById("gcl1_carousel_section")) {
 	prevBtn.addEventListener("mouseleave", () => (carouselTranslate = setInterval(changeSlider, speed)));
 
 	window.addEventListener("blur", () => {
-		clearInterval(carouselTranslate);
+		clearTimeout(carouselTranslate);
 	}, false);
 
-	window.addEventListener("blur", function () {
-		clearInterval(carouselTranslate);
+	window.addEventListener("focus", function () {
+		clearTimeout(carouselTranslate);
 		carouselTranslate = setInterval(changeSlider, speed);
 	});
 };

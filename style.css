@@ -19,41 +19,22 @@
 
 .gcl1_carousel_section {}
 
-.gcl1_carousel_wrapper {
-    /* max-height: 405px; */
-}
 
 .gcl1_carousel {
     position: relative;
     width: 100%;
     overflow: hidden;
 }
-
 .gcl1_carousel_inner {
     height: 100%;
     display: flex;
 }
-
 .gcl1_carousel_inner img {
     width: 100%;
     display: block;
-    /* height: 100%; */
 }
-
-
-
 .gcl1_indicator.gcl1_indicator_active {
     background-color: var(--dark);
-}
-
-.gcl1_controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 30px;
 }
 
 .gcl1_prev,
@@ -66,46 +47,35 @@
     border-radius: 2px;
 
 }
-
 .gcl1_prev svg,
 .gcl1_next svg {
     width: 4px;
     height: 8px;
 }
-
-
-
 /* left align */
 .gcl1_carousel_wrapper.gcl1_left_align {
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
 }
-
 .gcl1_left_align .gcl1_carousel {
-    /* max-width: 870px; */
     width: 100%;
 }
-
 .gcl1_featured_images {
     display: flex;
     gap: 10px;
 }
-
-
 .gcl1_featured_image img {
     width: 100%;
     display: block;
     height: 100%;
 }
-
 /* right align */
 .gcl1_carousel_wrapper.gcl1_right_align {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-
 /* bottom */
 .gcl1_carousel_wrapper.gcl1_bottom_align {
     display: flex;
@@ -114,10 +84,8 @@
 }
 
 .gcl1_carousel_item {
-    /* height: 100%; */
     min-width: 100%;
 }
-
 
 /* top align */
 .gcl1_carousel_wrapper.gcl1_top_align {
@@ -129,50 +97,43 @@
 /* updated */
 .gcl1_left_align .gcl1_carousel_inner,
 .gcl1_right_align .gcl1_carousel_inner {
-    /* height: 250px; */
+    height: 135px;
 }
-
-.gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img,
-.gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
-    /* height: 250px; */
-    width: 100%;
-    object-fit: cover;
-}
-
-/* .gcl1_bottom_align.gcl1_carousel_wrapper,
-.gcl1_top_align.gcl1_carousel_wrapper{
-    height: 250px;
-} */
-.gcl1_bottom_align.gcl1_carousel_wrapper .gcl1_carousel,
-.gcl1_top_align.gcl1_carousel_wrapper .gcl1_carousel {}
-
 .gcl1_bottom_align .gcl1_carousel_inner,
 .gcl1_top_align .gcl1_carousel_inner {
-    height: 100%;
+    height: 135px;
 }
-
 .gcl1_carousel_item {
     height: 100%;
 }
-
 .gcl1_carousel_item img {
-    height: 100%;
-}
-
-/* .gcl1_bottom_align .gcl1_carousel_inner .gcl1_carousel_item img,
-.gcl1_top_align .gcl1_carousel_inner .gcl1_carousel_item img {
-    height: 250px;
-    height: 100%;
-    width: 100%;
+    height: 135px;
+    /* width: 100%; */
     object-fit: cover;
-    transition: all 1s ease-in-out;
-} */
+}
 
 .gcl1_top_align .gcl1_featured_images {
     display: flex;
     flex-direction: row;
 }
+.gcl1_indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
 
+.gcl1_indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--dark30);
+}
+.gcl1_controls {
+   display: none;
+}
 @media(max-width:767px) {
 
     .gcl1_top_align .gcl1_featured_images .gcl1_featured_image:nth-child(1),
@@ -180,25 +141,21 @@
         display: none;
     }
 }
-
+@media(min-width:425px) {
+    .gcl1_bottom_align .gcl1_carousel_inner, .gcl1_top_align .gcl1_carousel_inner {
+        height: 240px;
+    }
+    .gcl1_bottom_align .gcl1_carousel_inner img, .gcl1_top_align .gcl1_carousel_inner img {
+        height: 240px;
+    }
+    .gcl1_left_align .gcl1_carousel_inner, .gcl1_right_align .gcl1_carousel_inner {
+        height: 240px;
+    }
+    .gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img, .gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
+        height: 240px;
+    }
+}
 @media(min-width:768px) {
-
-    .gcl1_indicators {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 10px;
-    }
-
-    .gcl1_indicator {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: var(--dark30);
-    }
-
     .gcl1_controls {
         position: absolute;
         top: 50%;
@@ -208,7 +165,15 @@
         justify-content: space-between;
         padding: 0px 30px;
     }
-
+    .gcl1_controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 30px;
+    }
     .gcl1_prev,
     .gcl1_next {
         padding: 13px 16px;
@@ -266,20 +231,25 @@
     /* updated */
     .gcl1_left_align .gcl1_carousel_inner,
     .gcl1_right_align .gcl1_carousel_inner {
-        /* height: 340px; */
+        height: 400px;
     }
 
     .gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img,
     .gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
-        /* height: 340px; */
+        height: 400px;
         /* height: 100%; */
     }
 
     .gcl1_bottom_align .gcl1_carousel_inner,
-    .gcl1_top_align .gcl1_carousel_inner {}
+    .gcl1_top_align .gcl1_carousel_inner {
+        height: 400px;
+    }
 
     .gcl1_bottom_align .gcl1_carousel_inner .gcl1_carousel_item img,
-    .gcl1_top_align .gcl1_carousel_inner .gcl1_carousel_item img {}
+    .gcl1_top_align .gcl1_carousel_inner .gcl1_carousel_item img {
+        height: 400px;
+        /* object-fit: cover; */
+    }
 
 
 }
@@ -361,27 +331,28 @@
     .gcl1_left_align .gcl1_carousel_inner,
     .gcl1_right_align .gcl1_carousel_inner {
         /* height: 390px; */
+        height: 100%;
     }
 
     .gcl1_left_align.gcl1_carousel_wrapper,
-    .gcl1_right_align.gcl1_carousel_wrapper,
-    .gcl1_bottom_align.gcl1_carousel_wrapper ,
-    .gcl1_top_align.gcl1_carousel_wrapper  {
-        height: 390px;
+    .gcl1_right_align.gcl1_carousel_wrapper{
+        height: 536px;
     }
 
     .gcl1_left_align .gcl1_carousel_inner .gcl1_carousel_item img,
     .gcl1_right_align .gcl1_carousel_inner .gcl1_carousel_item img {
         /* height: 100%; */
+        height: 536px;
     }
 
     .gcl1_bottom_align .gcl1_carousel_inner,
     .gcl1_top_align .gcl1_carousel_inner {
-      
+      height: 534px;
     }
 
     .gcl1_bottom_align .gcl1_carousel_inner .gcl1_carousel_item img,
     .gcl1_top_align .gcl1_carousel_inner .gcl1_carousel_item img {
-      
+      /* object-fit: cover; */
+      height: 537px;
     }
 }
