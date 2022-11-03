@@ -36,6 +36,14 @@
 .gcl1_indicator.gcl1_indicator_active {
     background-color: var(--dark);
 }
+.lineIndicator.gcl1_indicator_active {
+   width:20px !important;
+   transition: all .5s ease-in-out;
+}
+/* .squareIndicator.gcl1_indicator_active {
+   height: 10px !important;
+   transition: all .2s ease-in-out;
+} */
 
 .gcl1_prev,
 .gcl1_next {
@@ -118,17 +126,20 @@
 }
 .gcl1_indicators {
     position: absolute;
-    bottom: 20px;
+    /* bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
     display: flex;
     gap: 10px;
 }
+.gcl1_indicators.squareIndicatorWrapper {
+   align-items: flex-end;
+}
 
 .gcl1_indicator {
-    width: 10px;
+    /* width: 10px;
     height: 10px;
-    border-radius: 50%;
+    border-radius: 50%; */
     background-color: var(--dark30);
 }
 .gcl1_controls {

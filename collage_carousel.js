@@ -25,10 +25,22 @@ const settings = {
     ad3Link: "dscchgsdchgdschgsdvhcgvsdhgc",
 
 
-    slideDirection: "up", //bottom, left, right
-    showArrowController: true, //
-    showDotController: true, //
-        dotControllerPosition: "top-center", //
+    slideDirection: "up", /*
+                            1. up
+                            2. down
+                            3. left
+                            4. right    
+                        */ 
+    showArrowController: true, /* 1. true, 2. false*/
+    showDotController: true, /* 1. true, 2. false*/
+        dotControllerPosition: "top-center", /*
+                                1. top-left
+                                2. top-center
+                                3. top-right
+                                4. down-left
+                                5. down-center
+                                6. down-right
+                    */
 
     isAutoSlide: true,
         sliderDelay: 5, //s
