@@ -38,7 +38,7 @@
 }
 .lineIndicator.gcl1_indicator_active {
    width:20px !important;
-   transition: all .5s ease-in-out;
+   transition: all .3s ease-in-out;
 }
 /* .squareIndicator.gcl1_indicator_active {
    height: 10px !important;
@@ -131,6 +131,7 @@
     transform: translateX(-50%); */
     display: flex;
     gap: 10px;
+    width: 70px;
 }
 .gcl1_indicators.squareIndicatorWrapper {
    align-items: flex-end;

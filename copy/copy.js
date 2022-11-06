@@ -18,8 +18,8 @@ let dotControllerStyle = "type3";/* type1, type2, type3, type4*/
 // auto slide on/off
 let isAutoSlide = true; // true, false
 // slider delay
-let sliderDelay = 3;
-let sliderDelayTime = sliderDelay * 1000;
+let sliderDelay = 5;
+let sliderDelayTime = sliderDelay*1000;
 
 // transition
 let sliderTransitionTime = .5;
@@ -101,23 +101,23 @@ let adImages = adImagesFunc();
 
 if (sliderDirection === "left" || sliderDirection === "right") {
 	carouselSlide.style.flexDirection = "row";
-} else if (sliderDirection === "up" || sliderDirection === "down") {
+} else if (sliderDirection === "top" || sliderDirection === "down") {
 	carouselSlide.style.flexDirection = "column";
 };
 
 // dot controller position
 
-if (dotControllerPosition === "top-left") {
+if(dotControllerPosition === "top-left"){
 	dotIndicatorPushHere.style.cssText = `top:20px; left:30px;`
-} else if (dotControllerPosition === "top-center") {
+}else if(dotControllerPosition === "top-center"){
 	dotIndicatorPushHere.style.cssText = `top:20px; left:50%; transform:translateX(-50%);`
-} else if (dotControllerPosition === "top-right") {
+}else if(dotControllerPosition === "top-right"){
 	dotIndicatorPushHere.style.cssText = `top:20px; right:30px`
-} else if (dotControllerPosition === "down-left") {
+}else if(dotControllerPosition === "down-left"){
 	dotIndicatorPushHere.style.cssText = `bottom:20px; left:30px`
-} else if (dotControllerPosition === "down-center") {
+}else if(dotControllerPosition === "down-center"){
 	dotIndicatorPushHere.style.cssText = `bottom:20px; left: 50%; transform:translateX(-50%);`
-} else if (dotControllerPosition === "down-right") {
+}else if(dotControllerPosition === "down-right"){
 	dotIndicatorPushHere.style.cssText = `bottom:20px; right:30px;`
 };
 
@@ -165,20 +165,20 @@ if (carouselItemSize === 0) {
 		featureImageContainer.appendChild(adImageItem);
 
 		// create append dot indicatorItem
-		let dotIndicatorItem = elementMaker("div", [`gcl1_indicator ${i === 0 ? "gcl1_indicator_active" : ""}`], `gcl1_indicator_dot${i}`
+		let dotIndicatorItem = elementMaker("div", [`gcl1_indicator ${i === 0 ? "gcl1_indicator_active" : ""}`], 		`gcl1_indicator_dot${i}`
 		);
 		document.querySelector("gcl1_indicator")?.classList.add("gcl1_indicator_active");
 		dotIndicatorPushHere.appendChild(dotIndicatorItem);
 
-		if (dotControllerStyle === "type1") {
+		if(dotControllerStyle === "type1"){
 			dotIndicatorItem.style.cssText = `width:10px; height:10px;border-radius:50%`;
-		} else if (dotControllerStyle === "type2") {
+		}else if(dotControllerStyle === "type2"){
 			dotIndicatorItem.style.cssText = `width:15px; height:4px;border-radius:0%`;
 			dotIndicatorItem.classList.add("lineIndicator")
-		} else if (dotControllerStyle === "type3") {
+		}else if(dotControllerStyle === "type3"){
 			dotIndicatorItem.style.cssText = `width:8px; height:8px;border-radius:0%`;
 			dotIndicatorItem.classList.add("squareIndicator");
-		} else if (dotControllerStyle === "type4") {
+		}else if(dotControllerStyle === "type4"){
 			dotIndicatorItem.style.cssText = `width:8px; height:8px; border-radius:0%; transform:rotate(50deg)`;
 		}
 	};
@@ -196,7 +196,7 @@ let carouselItem = [...carouselSlide.children];
 
 if (sliderDirection === "right" || sliderDirection === "left") {
 	carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
-} else if (sliderDirection === "up" || sliderDirection === "down") {
+} else if (sliderDirection === "top" || sliderDirection === "down") {
 	carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
 };
 
@@ -231,13 +231,13 @@ function changeSlider() {
 	if (sliderDirection === "right" || sliderDirection === "down") {
 		count++;
 
-	} else if (sliderDirection === "left" || sliderDirection === "up") {
+	} else if (sliderDirection === "left" || sliderDirection === "top") {
 		count--;
 	};
 
 	if (sliderDirection === "left" || sliderDirection === "right") {
 		carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%");
-	} else if (sliderDirection === "up" || sliderDirection === "down") {
+	} else if (sliderDirection === "top" || sliderDirection === "down") {
 		carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%");
 	};
 
@@ -250,20 +250,23 @@ function changeSlider() {
 
 };
 
+
+
+
 if (isAutoSlide === true && document.getElementById("gcl1_carousel_section")) {
 	let carouselTranslate = setInterval(changeSlider, sliderDelayTime);
-	stopOnHover && carouselSlide.addEventListener("mouseover", () => clearInterval(carouselTranslate));
+	carouselSlide.addEventListener("mouseenter", () => clearInterval(carouselTranslate));
 
-	dotIndicatorPushHere.addEventListener("mouseover", () => clearInterval(carouselTranslate));
+	dotIndicatorPushHere.addEventListener("mouseenter", () => clearInterval(carouselTranslate));
 
-	nextBtn.addEventListener("mouseover", () => clearInterval(carouselTranslate));
-	prevBtn.addEventListener("mouseover", () => clearInterval(carouselTranslate));
+	nextBtn.addEventListener("mouseenter", () => clearInterval(carouselTranslate));
+	prevBtn.addEventListener("mouseenter", () => clearInterval(carouselTranslate));
 
-	stopOnHover && carouselSlide.addEventListener("mouseout", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
-	dotIndicatorPushHere.addEventListener("mouseout", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
+	stopOnHover && carouselSlide.addEventListener("mouseleave", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
+	dotIndicatorPushHere.addEventListener("mouseleave", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
 
-	nextBtn.addEventListener("mouseout", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
-	prevBtn.addEventListener("mouseout", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
+	nextBtn.addEventListener("mouseleave", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
+	prevBtn.addEventListener("mouseleave", () => (carouselTranslate = setInterval(changeSlider, sliderDelayTime)));
 
 	window.addEventListener("blur", () => {
 		clearTimeout(carouselTranslate);
@@ -279,11 +282,10 @@ if (isAutoSlide === true && document.getElementById("gcl1_carousel_section")) {
 carouselSlide.addEventListener("transitionend", function () {
 	if (carouselItem[count]?.id === "first_carousel_item") {
 		carouselSlide && (carouselSlide.style.transition = "none");
-	
-		count = carouselSlide?.children?.length - count;
+		count = 1
 		if (sliderDirection === "right" || sliderDirection === "left") {
 			carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
-		} else if (sliderDirection === "up" || sliderDirection === "down") {
+		} else if (sliderDirection === "top" || sliderDirection === "down") {
 			carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
 		}
 	}
@@ -292,7 +294,7 @@ carouselSlide.addEventListener("transitionend", function () {
 		count = carouselItem?.length - 2;
 		if (sliderDirection === "right" || sliderDirection === "left") {
 			carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
-		} else if (sliderDirection === "up" || sliderDirection === "down") {
+		} else if (sliderDirection === "top" || sliderDirection === "down") {
 			carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
 		}
 	}
@@ -305,10 +307,10 @@ carouselSlide.addEventListener("transitionend", function () {
 			removeClass();
 			indicator.classList.add("gcl1_indicator_active");
 			carouselSlide && (carouselSlide.style.transition = `transform ${sliderTransitionTime}s ease-in-out`);
-			count = index;
+			count = index + 1;
 			if (sliderDirection === "right" || sliderDirection === "left") {
 				carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%)");
-			} else if (sliderDirection === "up" || sliderDirection === "down") {
+			} else if (sliderDirection === "top" || sliderDirection === "down") {
 				carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%)");
 			}
 			ind = index;
@@ -317,39 +319,64 @@ carouselSlide.addEventListener("transitionend", function () {
 );
 
 nextBtn.addEventListener("click", function () {
-	removeClass();
-	if (count >= carouselSlide?.children?.length - 1) return;
-	carouselSlide && (carouselSlide.style.transition = `transform ${sliderTransitionTime}s ease-in-out`);
-	if (count !== carouselSlide?.children?.length-2) {
-		count++;
-	} else {
-		count = 1;
-	};
+	changeSlider()
+	// removeClass();
+	// if (count >= carouselSlide?.children?.length - 1) return; 
+	// carouselSlide && (carouselSlide.style.transition = `transform ${sliderTransitionTime}s ease-in-out`);
 
-	if (sliderDirection === "left" || sliderDirection === "right") {
-		carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%");
-	} else if (sliderDirection === "up" || sliderDirection === "down") {
-		carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%");
-	};
-	document.getElementById(`gcl1_indicator_dot${count - 1}`).classList.add("gcl1_indicator_active");
+	// if(count < carouselSlide?.children?.length - 1){
+	// 	count++;
+	// }else{
+	// 	count = 1;
+	// }
+
+
+	// if (sliderDirection === "left" || sliderDirection === "right") {
+	// 	carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%");
+	// } else if (sliderDirection === "top" || sliderDirection === "down") {
+	// 	carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%");
+	// };
+	// ind++;
+
+	// if (ind >= dotIndicatorPushHere?.children.length) {
+	// 	ind = 0;
+	// };
+	// document.getElementById(`gcl1_indicator_dot${ind}`).classList.add("gcl1_indicator_active");
+
 });
+
+
 
 prevBtn.addEventListener("click", function () {
 	removeClass();
 
-	if (count <= 1) {
-		count = carouselSlide?.children?.length - 1;
+	if (count < 1) {
+		count = carouselSlide?.children?.length - 2
 	};
 	carouselSlide && (carouselSlide.style.transition = `transform ${sliderTransitionTime}s ease-in-out`);
 
-	count--;
+	if (sliderDirection === "right" || sliderDirection === "down") {
+		count--;
+
+	} else if (sliderDirection === "left" || sliderDirection === "top") {
+		count++;
+	};
+
 	if (sliderDirection === "left" || sliderDirection === "right") {
 		carouselSlide && (carouselSlide.style.transform = "translateX(" + -size * count + "%");
-	} else if (sliderDirection === "up" || sliderDirection === "down") {
+	} else if (sliderDirection === "top" || sliderDirection === "down") {
 		carouselSlide && (carouselSlide.style.transform = "translateY(" + -size * count + "%");
 	};
 
-	document.getElementById(`gcl1_indicator_dot${count - 1}`).classList.add("gcl1_indicator_active");
+
+
+	ind++;
+	if (ind >= dotIndicatorPushHere?.children.length) {
+		ind = 0;
+		console.log("indicator = ", ind, "counter = ", count)
+	}
+
+	document.getElementById(`gcl1_indicator_dot${ind}`).classList.add("gcl1_indicator_active");
 });
 // carouselImage
 
